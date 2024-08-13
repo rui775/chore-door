@@ -1,4 +1,8 @@
 // Access HTML elements
+let doorImage1 = document.getElementById('door1');
+let doorImage2 = document.getElementById('door2');
+let doorImage3 = document.getElementById('door3');
+let startButton = document.getElementById('start');
 
 let botDoorPath = 'https://content.codecademy.com/projects/chore-door/images/robot.svg';
 let beachDoorPath = 'https://content.codecademy.com/projects/chore-door/images/beach.svg';
@@ -12,7 +16,36 @@ let openDoor3;
 let currentlyPlaying = true;
 
 // Define game logic to check doors, progress game, end game, and choose a random chore door
+const isClicked = (door) => {
+    if (doorImage1.src === closedDoorPath) {
+        return true;
+    }
+    return false;
+};
 
+const isBot = (door) => {
+    if (door.src === botDoorPath) {
+        return true;
+    }
+    return false;
+};
+
+const gameOver = (status) => {
+    if (status === 'win') {
+        startButton.innerHTML = 'You win! Play again?';
+    }
+    startButton.innerHTML = 'You lose! Play again?';
+    currentlyPlaying = false;
+};
+
+const playDoor = (door) => {
+    numClosedDoors -= 1;
+    if (numClosedDoors === 0) {
+        gameOver('win');
+    } else if (isBot(door)) {
+        gameOver();
+    }
+};
 
 doorImage1.onclick = () => {
     if (currentlyPlaying && isClicked(doorImage1)) {
