@@ -38,6 +38,23 @@ const gameOver = (status) => {
     currentlyPlaying = false;
 };
 
+const randomChoreDoorGenerator = () => {
+    let choreDoor = Math.floor(Math.random() * numClosedDoors);
+    if (choreDoor === 0) {
+        openDoor1 = botDoorPath;
+        openDoor2 = beachDoorPath;
+        openDoor3 = spaceDoorPath;
+    } else if (choreDoor === 1) {
+        openDoor1 = beachDoorPath;
+        openDoor2 = spaceDoorPath;
+        openDoor3 = botDoorPath;
+    } else {
+        openDoor1 = spaceDoorPath;
+        openDoor2 = botDoorPath;
+        openDoor3 = beachDoorPath;
+    }
+};
+
 const playDoor = (door) => {
     numClosedDoors -= 1;
     if (numClosedDoors === 0) {
